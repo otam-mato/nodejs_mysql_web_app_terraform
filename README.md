@@ -16,7 +16,7 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 </p>
 
 <p align="center">
-  <img src="![image](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/afb8cc08-2f0c-4dfe-84ae-0bf886ae0053)" width="700px"/>
+  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/afb8cc08-2f0c-4dfe-84ae-0bf886ae0053" width="700px"/>
 </p>
 
 
