@@ -8,15 +8,15 @@
 This is a simple Node.JS Express application. It has a two-layer architecture: application layer and data layer. It connects to a MySQL database hosted on an AWS RDS instance, allowing for CRUD operations. Express provides a robust set of features for web and mobile applications.
 
 <p align="center">
-  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/5992d062-076b-4faa-8a6b-be589dbe632c" width="700px"/>
+  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/938f8409-1cf9-4ae5-a5fd-549a395948da" width="700px"/>
 </p>
 
 <p align="center">
-  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/b2875788-5f3f-4e3e-8ae7-9db55a5082f8" width="700px"/>
+  <img src="![image](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/08a5a711-8f1d-47ec-93fb-f73c430b47b9)" width="700px"/>
 </p>
 
 <p align="center">
-  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/a5934b65-0042-48fc-b913-670c934c4478" width="700px"/>
+  <img src="![image](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/afb8cc08-2f0c-4dfe-84ae-0bf886ae0053)" width="700px"/>
 </p>
 
 
