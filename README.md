@@ -250,6 +250,8 @@ export APP_DB_PASSWORD="<your password>" \
 export APP_DB_NAME=COFFEE \
 ```
 
+#### Alternative ways to create a database
+
 ```bash
 # Testing connection to the database
 mysql -h database-2.xxxxxxxxxxxx.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
