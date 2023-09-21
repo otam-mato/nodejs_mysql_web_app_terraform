@@ -1,5 +1,5 @@
 
-# Node.JS - MySQL Web App. <br><br> Deployment automation with Terraform
+# Node.JS - MySQL Web App. <br><br> Infrastructure creation automation with Terraform
 
 <br>
 
