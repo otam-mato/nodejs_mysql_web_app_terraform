@@ -14,11 +14,11 @@ const Supplier = function (supplier) {
 //   a simple mechanism enabling the app to recover from a momentary missing db connection
 Supplier.dbConnect = () => {
     const connection = mysql.createConnection({
-        host: "database-2.c9rglxpvlls0.us-east-1.rds.amazonaws.com",
-        port: "3306",
-        user: "admin",
-        password: "12345678",
-        database: "COFFEE"
+        host: dbConfig.APP_DB_HOST,
+        port: dbConfig.APP_DB_PORT,
+        user: dbConfig.APP_DB_USER,
+        password: dbConfig.APP_DB_PASSWORD,
+        database: dbConfig.APP_DB_NAME
     });
     connection.connect(error => {
         if (error) {
