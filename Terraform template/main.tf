@@ -85,6 +85,8 @@ resource "aws_instance" "ec2_instance" {
   associate_public_ip_address = true
   key_name      = "test_delete"
 
+  depends_on = [aws_db_instance.rds_instance]
+
   user_data     = <<-EOF
 #!/bin/bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
