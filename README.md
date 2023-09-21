@@ -52,10 +52,10 @@ provider "aws" {
   shared_credentials_files  = ["/home/ec2-user/.aws/credentials"]
 }
 
-
 data "aws_availability_zones" "available" {
   state = "available"
 }
+
 data "aws_ssm_parameter" "current-ami" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
@@ -68,51 +68,53 @@ resource "aws_default_vpc" "default" {
   }
 }
 
-resource "aws_subnet" "public_subnet" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "172.31.98.128/25"
-  availability_zone = data.aws_availability_zones.available.names[0]
-
-  tags = {
-    Name = "test-public-subnet"
-  }
+data "aws_vpc" "default" {
+  default = true
 }
 
-resource "aws_subnet" "private_subnet" {
-  vpc_id     = aws_default_vpc.default.id
-  cidr_block = "<your_ip>/25" #use your ip here
-  availability_zone = data.aws_availability_zones.available.names[1]
+locals {
+  subnet_count = 2  # Adjust this to the desired number of subnets
+  base_cidr_block = data.aws_vpc.default.cidr_block
+  subnet_bits = 8  # You can adjust the number of bits as needed
+}
+
+resource "aws_subnet" "subnets" {
+  count = local.subnet_count
+
+  vpc_id            = aws_default_vpc.default.id
+  cidr_block        = cidrsubnet(local.base_cidr_block, local.subnet_bits, count.index + 130)  # Offset by some number to avoid conflicts
+  availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
-    Name     = "test-private-subnet"
+    Name = "test-subnet-${count.index + 1}"
   }
 }
 
 
 resource "aws_security_group" "ec2_security_group" {
-  name        = "test-ec2-security-group"
-  description = "Allow access"
+  name        = "test-ec2-security-group1"
+  description = "Allow ssh access"
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["123.123.123.123/32"] # use your ip here
+    cidr_blocks = ["0.0.0.0/0"]  # Add your SSH ingress rules here
   }
 
   ingress {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]  # Add your HTTP ingress rules here
   }
   
   ingress {
     from_port   = 3000
     to_port     = 3000
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]  # Add your custom application port ingress rules here
   }
 
   egress {
@@ -125,26 +127,17 @@ resource "aws_security_group" "ec2_security_group" {
 
 resource "aws_instance" "ec2_instance" {
   ami           = data.aws_ssm_parameter.current-ami.value
-  instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public_subnet.id
+  instance_type = "t2.medium"
+  subnet_id     = aws_subnet.subnets[0].id  # Use the first subnet created
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
   associate_public_ip_address = true
   key_name      = "test_delete"
 
   user_data     = <<-EOF
-  #!/bin/bash -xe
-  sudo su
-  yum install git
-  git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
-  cd CRUD_WebApp_NodeJS_AWS_RDS_MySql/resources/codebase_partner/
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  nvm install node
-  nvm install --lts
-  nvm install 10.16.0
-  npm install express
+#!/bin/bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+nvm install 16.0.0
+nvm use 16.0.0
   EOF
   
   tags = {
@@ -153,7 +146,7 @@ resource "aws_instance" "ec2_instance" {
 }
 
 resource "aws_security_group" "rds_security_group" {
-  name        = "test-rds-security-group"
+  name        = "test-rds-security-group1"
   description = "Allow mysql access"
   vpc_id      = aws_default_vpc.default.id
 
@@ -161,13 +154,13 @@ resource "aws_security_group" "rds_security_group" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["123.123.123.123/32"] # use the ip of created EC2 instance or the id of its security group
+    cidr_blocks = ["0.0.0.0/0"]  # Add your RDS ingress rules here
   }
 }
 
 resource "aws_db_subnet_group" "rds_subnet_group" {
-  name        = "test-rds-subnet-group"
-  subnet_ids  = [aws_subnet.private_subnet.id, aws_subnet.public_subnet.id]
+  name       = "test-rds-subnet-group1"
+  subnet_ids = aws_subnet.subnets[*].id
 }
 
 resource "aws_db_instance" "rds_instance" {
@@ -181,15 +174,16 @@ resource "aws_db_instance" "rds_instance" {
   vpc_security_group_ids  = [aws_security_group.rds_security_group.id]
   db_subnet_group_name    = aws_db_subnet_group.rds_subnet_group.name
   skip_final_snapshot     = true
+  publicly_accessible     = true
 }
 
+
 resource "null_resource" "setup_db" {
-  depends_on = [aws_db_instance.rds_instance] #wait for the db to be ready
+  depends_on = [aws_db_instance.rds_instance] # Wait for the DB to be ready
   provisioner "local-exec" {
     command = "mysql -h ${aws_db_instance.rds_instance.address} -u ${aws_db_instance.rds_instance.username} --password=${var.dbpassword}  ${var.dbname} < my_sql.sql"
   }
 }
-
 
 
 output "rds_hostname" {
