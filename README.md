@@ -276,6 +276,7 @@ create table suppliers(
 
 ```zsh
 cd CRUD_WebApp_NodeJS_AWS_RDS_MySql/resources/codebase_partner/
+export APP_DB_HOST=<paste here the output endpoint of the created RDS instance> 
 npm install
 npm start
 ```
