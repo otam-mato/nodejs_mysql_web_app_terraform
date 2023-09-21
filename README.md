@@ -29,6 +29,7 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 - AWS Account
 - Proper Permissions for your AWS user
 - Terraform installed
+- MySQL installed (https://muleif.medium.com/how-to-install-mysql-on-amazon-linux-2023-5d39afa5bf11)
 - An EC2 instance for a manual deployment case (I am using Amazon Linux 2)
 - An RDS instance for a manual deployment case  (I am using "db.t2.micro" "mysql")
 
