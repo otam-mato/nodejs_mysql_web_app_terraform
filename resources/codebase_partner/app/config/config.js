@@ -1,6 +1,6 @@
 // define default config, but allow overrides from ENV vars
 let config = {
-  APP_DB_HOST: "database-2.c9rglxpvlls0.us-east-1.rds.amazonaws.com",
+  APP_DB_HOST: "localhost",
   APP_DB_USER: "admin",
   APP_DB_PORT: "3306" ,
   APP_DB_PASSWORD: "12345678",
