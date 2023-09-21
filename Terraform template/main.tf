@@ -92,9 +92,9 @@ resource "aws_instance" "ec2_instance" {
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 nvm install 16.0.0
 nvm use 16.0.0
-
 git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
 cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
+export APP_DB_HOST=$(terraform output rds_hostname)
 npm install
 node index.js
   EOF
