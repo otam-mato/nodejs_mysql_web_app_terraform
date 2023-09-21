@@ -3,7 +3,7 @@
 
 <br>
 
-> **Note:** The series of demo projects experimenting with the same Node.js app.<br><br>
+> **Note:** The series of demo projects experimenting with a Node.js app.<br><br>
 > In this demo I automate the deployment of the app using Terraform.
 
 
