@@ -34,7 +34,7 @@ resource "aws_subnet" "subnets" {
   count = local.subnet_count
 
   vpc_id            = aws_default_vpc.default.id
-  cidr_block        = cidrsubnet(local.base_cidr_block, local.subnet_bits, count.index + 130)  # Offset by 8 to avoid conflicts
+  cidr_block        = cidrsubnet(local.base_cidr_block, local.subnet_bits, count.index + 130)  # Offset by some number to avoid conflicts
   availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
