@@ -37,7 +37,7 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 ### 1. Automated Deployment with Terraform
 
 #### Template Description
-The Terraform configuration deploys resources on AWS. It sets up a VPC, subnets, security groups, EC2, and RDS instances. After the EC2 instance launches, it runs a script to clone the current Git repository, installs node.js and dependencies.
+The Terraform configuration deploys resources on AWS. It sets up a VPC, subnets, security groups, EC2, and RDS instances. After the EC2 instance launches, it runs a script to install node.js.
 
 The RDS instance is created with specified configurations and a script is run to set up the database.
 
