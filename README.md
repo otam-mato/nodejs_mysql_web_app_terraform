@@ -1,5 +1,5 @@
 
-# Node.JS - MySQL Web App. <br><br> Infrastructure creation automation with Terraform
+# Node.JS - MySQL Web App. <br><br> Infrastructure creation automation with Terraform and deploying the app on EC2 and RDS instances.
 
 <br>
 
