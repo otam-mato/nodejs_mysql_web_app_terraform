@@ -237,10 +237,11 @@ cd CRUD_WebApp_NodeJS_AWS_RDS_MySql/resources/codebase_partner/
 
 #### Setup
 ```bash
-# Install Node, NPM, and Express
+# Install Node, NPM, and dependencies
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 nvm install 16.0.0
 nvm use 16.0.0
+npm install
 
 # Set Environment Variables
 export APP_DB_HOST=<paste here the output endpoint of the created RDS instance> \
