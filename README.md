@@ -251,7 +251,7 @@ export APP_DB_NAME=COFFEE \
 ```
 
 ```bash
-# connect to the database
+# Testing connection to the database
 mysql -h database-2.xxxxxxxxxxxx.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
 ```
 
