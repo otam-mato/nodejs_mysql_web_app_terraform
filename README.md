@@ -1,6 +1,8 @@
 
 # Node.JS - MySQL Web App. <br><br> Deployment automation with Terraform
 
+
+<br>
 > **Note:** The series of demo projects experimenting with the same Node.js app.<br><br>
 > In this demo I automate the deployment of the app using Terraform.
 
