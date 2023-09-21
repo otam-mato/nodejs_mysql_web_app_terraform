@@ -23,8 +23,6 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 </p>
 
 
-
-
 ## Prerequisites
 - AWS Account
 - Proper Permissions for your AWS user
@@ -231,6 +229,10 @@ terraform validate
 terraform plan
 terraform apply
 ```
+
+<p align="center">
+  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/54446e4a-f407-4de6-ab18-2adc534a2a13" width="700px"/>
+</p>
 
 ### 2. Manual Launch
 #### Clone the Repository
