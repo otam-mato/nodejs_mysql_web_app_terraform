@@ -44,7 +44,7 @@ The Terraform configuration deploys resources on AWS. It sets up a VPC, subnets,
 
 The RDS instance is created with specified configurations and a script is run to set up the database.
 
-> **Terraform files:** [GitHub Link](https://github.com/otammato/CRUD_WebApp_NodeJS_AWS_RDS_MySql/tree/main/Terraform_template)
+> **Terraform files:** [GitHub Link](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/tree/676c0d649ebc857dba12cc7517ee11a9d6a6f497/Terraform%20template)
 
 <details markdown=1><summary markdown="span">Terraform main.tf here</summary>
 
