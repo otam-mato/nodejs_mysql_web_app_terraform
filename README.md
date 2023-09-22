@@ -11,6 +11,7 @@
 > **Note:** The series of demo projects experimenting with a Node.js app.<br><br>
 > In this demo I automate the creating of the infrastructure with Terraform and deploy there the app on EC2 + RDS instances.
 
+<br>
 
 ## Summary
 This is a simple Node.JS Express application. It has a two-layer architecture: application layer and data layer. It connects to a MySQL database hosted on an AWS RDS instance, allowing for CRUD operations. Express provides a robust set of features for web and mobile applications.
