@@ -4,7 +4,7 @@
 <br>
 
 > **Note:** The series of demo projects experimenting with a Node.js app.<br><br>
-> In this demo I automate creating the infrastructure with Terraform and deploy there the app on EC2 + RDS instances.
+> In this demo I automate creating the infrastructure on AWS with Terraform and deploy there the app on EC2 + RDS instances.
 
 <br>
 
