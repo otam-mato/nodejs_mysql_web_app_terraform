@@ -1,5 +1,8 @@
 
-# Node.JS - MySQL Web App. <br><br> Infrastructure creation with Terraform and deploying the app on EC2 and RDS instances.
+# Node.JS - MySQL Web App. 
+
+# 1. Creating The Infrastructure with Terraform 
+# 2. Deploying the app on the created EC2 and RDS instances.
 
 <br>
 
