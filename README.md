@@ -37,7 +37,7 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 
 ## Running the App on AWS EC2 and RDS MySQL Instances
 
-### 1. Automated Deployment with Terraform
+### 1. Creating the Infrastructure with Terraform
 
 #### Template Description
 The Terraform configuration deploys resources on AWS. It sets up a VPC, subnets, security groups, EC2, and RDS instances. After the EC2 instance launches, it runs a script to install node.js and imports 'my_sql.sql' database into the RDS MySQL database.
