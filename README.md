@@ -21,7 +21,8 @@
 - Express
 - JavaScript
 - MySQL
-
+- Terraform
+  
 <br>
 
 ## Summary
