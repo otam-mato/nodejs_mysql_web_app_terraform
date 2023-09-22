@@ -238,7 +238,7 @@ terraform apply
 #### Clone the Repository
 ```bash
 git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
-cd CRUD_WebApp_NodeJS_AWS_RDS_MySql/resources/codebase_partner/
+cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
 ```
 
 #### Setup
