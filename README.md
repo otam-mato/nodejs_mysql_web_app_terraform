@@ -56,7 +56,7 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 #### Template Description
 The Terraform configuration deploys resources on AWS. It sets up a VPC, subnets, security groups, EC2, and RDS instances. After the EC2 instance launches, it runs a script to install node.js and imports 'my_sql.sql' database into the RDS MySQL database.
 
-Lastly, the RDS instance is created with specified configurations and a script runs to set up the database.
+Lastly, it creates the RDS instance with specified configurations and runs a script to set up the database.
 
 > **Terraform files:** [GitHub Link](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/tree/676c0d649ebc857dba12cc7517ee11a9d6a6f497/Terraform%20template)
 
