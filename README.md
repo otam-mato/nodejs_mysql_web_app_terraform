@@ -3,13 +3,13 @@
 
 <br>
 
-# - Creating The Infrastructure with Terraform 
-# - Deploying the app on the created EC2 and RDS instances.
+> **Note:** The series of demo projects experimenting with a Node.js app.<br><br>
+> In this demo I automate creating the infrastructure with Terraform and deploy there the app on EC2 + RDS instances.
 
 <br>
 
-> **Note:** The series of demo projects experimenting with a Node.js app.<br><br>
-> In this demo I automate creating the infrastructure with Terraform and deploy there the app on EC2 + RDS instances.
+# - Creating The Infrastructure with Terraform 
+# - Deploying the app on the created EC2 and RDS instances.
 
 <br>
 
