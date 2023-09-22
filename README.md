@@ -246,6 +246,11 @@ terraform apply
 </p>
 
 ### 2. Deploying the app
+#### SSH to the created instance
+
+```
+ssh -i "your_key.pem" ec2-user@your_dns_name.compute-1.amazonaws.com
+```
 #### Clone the Repository
 ```bash
 git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
