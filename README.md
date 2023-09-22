@@ -245,7 +245,7 @@ terraform apply
   <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/54446e4a-f407-4de6-ab18-2adc534a2a13" width="700px"/>
 </p>
 
-### 2. Manual Launch
+### 2. Deploying the app
 #### Clone the Repository
 ```bash
 git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
