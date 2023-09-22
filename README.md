@@ -35,8 +35,8 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 - Configure AWS with the command ```aws configure```
 - Terraform installed (https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - MySQL installed (https://muleif.medium.com/how-to-install-mysql-on-amazon-linux-2023-5d39afa5bf11)
-- An EC2 instance for a manual deployment case (I am using Amazon Linux 2023)
-- An RDS instance for a manual deployment case  (I am using "db.t2.micro" "mysql")
+- A machine or EC2 instance to launch the Terraform script
+
 
 ## Running the App on AWS EC2 and RDS MySQL Instances
 
