@@ -24,7 +24,7 @@ data "http" "my_current_ip" {
 
 # Local Variables
 locals {
-  my_public_ip = jsondecode(data.http.my_ip.body).origin
+  my_public_ip = jsondecode(data.http.my_current_ip.body).origin
   subnet_count    = 2  # Adjust this to the desired number of subnets
   base_cidr_block = data.aws_vpc.default.cidr_block
   subnet_bits     = 8  # You can adjust the number of bits as needed
