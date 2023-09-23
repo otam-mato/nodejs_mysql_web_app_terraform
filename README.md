@@ -324,11 +324,13 @@ npm start
 ```
 If you do not set the env vars when starting the app the values from `app/config/config.js` will be used. In this case make sure they correlate with credentials used on RDS database.
 
-#### Access the app via the DNS or public IP of the EC2 instance. Confirm the database creation using the MySQL command.
+#### Access the app via the DNS or public IP of the EC2 instance. 
 
 <p align="center">
   <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/08a5a711-8f1d-47ec-93fb-f73c430b47b9" width="700px"/>
 </p>
+
+#### Test the database using the MySQL commands.
 
 <p align="center">
   <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/afb8cc08-2f0c-4dfe-84ae-0bf886ae0053" width="700px"/>
