@@ -275,14 +275,18 @@ export APP_DB_NAME=COFFEE \
 
 #### Alternative ways to create a database
 
+Terraform template suggests importing the previously exported (using 'mysqldump' command) database called 'my_sql.sql'
+
+Alternatively, you can create the new database:
+
 ```bash
 # Connecting to the database
 mysql -h database-2.xxxxxxxxxxxx.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
 ```
 
 ```sql
-create DATABASE coffee;
-use coffee;
+create DATABASE COFFEE;
+use COFFEE;
 create table suppliers(
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
