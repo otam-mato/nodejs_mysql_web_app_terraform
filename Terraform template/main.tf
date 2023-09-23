@@ -1,9 +1,11 @@
+# Provider Configuration
 provider "aws" {
   region                    = "us-east-1"
   shared_config_files       = ["/home/ec2-user/.aws/config"]
   shared_credentials_files  = ["/home/ec2-user/.aws/credentials"]
 }
 
+# Data Sources
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -12,6 +14,18 @@ data "aws_ssm_parameter" "current-ami" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
+data "aws_vpc" "default" {
+  default = true
+}
+
+# Local Variables
+locals {
+  subnet_count    = 2  # Adjust this to the desired number of subnets
+  base_cidr_block = data.aws_vpc.default.cidr_block
+  subnet_bits     = 8  # You can adjust the number of bits as needed
+}
+
+# Default VPC
 resource "aws_default_vpc" "default" {
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -20,16 +34,7 @@ resource "aws_default_vpc" "default" {
   }
 }
 
-data "aws_vpc" "default" {
-  default = true
-}
-
-locals {
-  subnet_count = 2  # Adjust this to the desired number of subnets
-  base_cidr_block = data.aws_vpc.default.cidr_block
-  subnet_bits = 8  # You can adjust the number of bits as needed
-}
-
+# Subnets
 resource "aws_subnet" "subnets" {
   count = local.subnet_count
 
@@ -42,10 +47,10 @@ resource "aws_subnet" "subnets" {
   }
 }
 
-
+# EC2 Security Group
 resource "aws_security_group" "ec2_security_group" {
   name        = "test-ec2-security-group1"
-  description = "Allow ssh access"
+  description = "Allow ssh, http, and custom application port access"
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
@@ -61,7 +66,7 @@ resource "aws_security_group" "ec2_security_group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]  # Add your HTTP ingress rules here
   }
-  
+
   ingress {
     from_port   = 3000
     to_port     = 3000
@@ -77,6 +82,7 @@ resource "aws_security_group" "ec2_security_group" {
   }
 }
 
+# EC2 Instance
 resource "aws_instance" "ec2_instance" {
   ami           = data.aws_ssm_parameter.current-ami.value
   instance_type = "t2.medium"
@@ -85,21 +91,11 @@ resource "aws_instance" "ec2_instance" {
   associate_public_ip_address = true
   key_name      = "test_delete"
 
-  depends_on = [aws_db_instance.rds_instance]
-
   user_data     = <<-EOF
 #!/bin/bash
-sudo yum update -y
-sudo yum install -y git
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 nvm install 16.0.0
 nvm use 16.0.0
-git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
-cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
-npm install
   EOF
   
   tags = {
@@ -107,24 +103,27 @@ npm install
   }
 }
 
+# RDS Security Group
 resource "aws_security_group" "rds_security_group" {
   name        = "test-rds-security-group1"
-  description = "Allow mysql access"
+  description = "Allow MySQL access"
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Add your RDS ingress rules here
+    cidr_blocks = [aws_security_group.ec2_security_group.id]  # I made the RDS intance accesible only from created EC2 instance.
   }
 }
 
+# RDS Subnet Group
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = "test-rds-subnet-group1"
   subnet_ids = aws_subnet.subnets[*].id
 }
 
+# RDS Instance
 resource "aws_db_instance" "rds_instance" {
   engine                  = "mysql"
   engine_version          = "5.7"
@@ -136,10 +135,10 @@ resource "aws_db_instance" "rds_instance" {
   vpc_security_group_ids  = [aws_security_group.rds_security_group.id]
   db_subnet_group_name    = aws_db_subnet_group.rds_subnet_group.name
   skip_final_snapshot     = true
-  publicly_accessible     = true
+  publicly_accessible     = false # Set to true to unrestrict public internet access for testing the connectivity
 }
 
-
+# Provisioning for RDS
 resource "null_resource" "setup_db" {
   depends_on = [aws_db_instance.rds_instance] # Wait for the DB to be ready
   provisioner "local-exec" {
@@ -147,7 +146,7 @@ resource "null_resource" "setup_db" {
   }
 }
 
-
+# Outputs
 output "rds_hostname" {
   description = "RDS instance hostname"
   value       = aws_db_instance.rds_instance.address
@@ -175,3 +174,5 @@ output "ec2_public_dns" {
 output "ec2_public_ip" {
   value = aws_instance.ec2_instance.public_ip
 }
+
+
