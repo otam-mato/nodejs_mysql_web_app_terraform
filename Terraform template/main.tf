@@ -107,6 +107,7 @@ nvm use 16.0.0
 
 sudo su
 sudo yum install -y git
+cd /home/ec2-user
 git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
 cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
 npm install
