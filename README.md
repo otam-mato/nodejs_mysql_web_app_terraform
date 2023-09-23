@@ -317,8 +317,7 @@ create table suppliers(
 #### Start the app with npm command
 
 ```zsh
-cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
-export APP_DB_HOST=<paste here the output endpoint of the created RDS instance> 
+cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner 
 npm install
 npm start
 ```
