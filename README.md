@@ -64,12 +64,14 @@ Lastly, it creates the RDS instance with specified configurations and runs a scr
 <details markdown=1><summary markdown="span">Terraform main.tf here</summary>
 
 ```tf
+# Provider Configuration
 provider "aws" {
   region                    = "us-east-1"
-  shared_config_files       = ["/home/ec2-user/.aws/config"]
-  shared_credentials_files  = ["/home/ec2-user/.aws/credentials"]
+  shared_config_files       = ["/home/ec2-user/.aws/config"] # never hard-code the sensitive data
+  shared_credentials_files  = ["/home/ec2-user/.aws/credentials"] # never hard-code the sensitive data
 }
 
+# Data Sources
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -78,6 +80,18 @@ data "aws_ssm_parameter" "current-ami" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
+data "aws_vpc" "default" {
+  default = true
+}
+
+# Local Variables
+locals {
+  subnet_count    = 2  # Adjust this to the desired number of subnets
+  base_cidr_block = data.aws_vpc.default.cidr_block
+  subnet_bits     = 8  # You can adjust the number of bits as needed
+}
+
+# Default VPC
 resource "aws_default_vpc" "default" {
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -86,16 +100,7 @@ resource "aws_default_vpc" "default" {
   }
 }
 
-data "aws_vpc" "default" {
-  default = true
-}
-
-locals {
-  subnet_count = 2  # Adjust this to the desired number of subnets
-  base_cidr_block = data.aws_vpc.default.cidr_block
-  subnet_bits = 8  # You can adjust the number of bits as needed
-}
-
+# Subnets
 resource "aws_subnet" "subnets" {
   count = local.subnet_count
 
@@ -108,10 +113,10 @@ resource "aws_subnet" "subnets" {
   }
 }
 
-
+# EC2 Security Group
 resource "aws_security_group" "ec2_security_group" {
   name        = "test-ec2-security-group1"
-  description = "Allow ssh access"
+  description = "Allow ssh, http, and custom application port access"
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
@@ -127,7 +132,7 @@ resource "aws_security_group" "ec2_security_group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]  # Add your HTTP ingress rules here
   }
-  
+
   ingress {
     from_port   = 3000
     to_port     = 3000
@@ -143,6 +148,7 @@ resource "aws_security_group" "ec2_security_group" {
   }
 }
 
+# EC2 Instance
 resource "aws_instance" "ec2_instance" {
   ami           = data.aws_ssm_parameter.current-ami.value
   instance_type = "t2.medium"
@@ -153,9 +159,10 @@ resource "aws_instance" "ec2_instance" {
 
   user_data     = <<-EOF
 #!/bin/bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-nvm install 16.0.0
-nvm use 16.0.0
+sudo su
+sudo yum install -y git
+git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git /home/ec2-user/nodejs_mysql_web_app_terraform
+cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
   EOF
   
   tags = {
@@ -163,24 +170,28 @@ nvm use 16.0.0
   }
 }
 
+# RDS Security Group
 resource "aws_security_group" "rds_security_group" {
   name        = "test-rds-security-group1"
-  description = "Allow mysql access"
+  description = "Allow MySQL access"
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Add your RDS ingress rules here
+    cidr_blocks = ["0.0.0.0/0"] # Put your ip addres here for security
+    # security_groups  = [aws_security_group.ec2_security_group.id] # For production restrict the RDS intance to be accesible only from created EC2 instance.
   }
 }
 
+# RDS Subnet Group
 resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = "test-rds-subnet-group1"
   subnet_ids = aws_subnet.subnets[*].id
 }
 
+# RDS Instance
 resource "aws_db_instance" "rds_instance" {
   engine                  = "mysql"
   engine_version          = "5.7"
@@ -192,10 +203,10 @@ resource "aws_db_instance" "rds_instance" {
   vpc_security_group_ids  = [aws_security_group.rds_security_group.id]
   db_subnet_group_name    = aws_db_subnet_group.rds_subnet_group.name
   skip_final_snapshot     = true
-  publicly_accessible     = true
+  publicly_accessible     = true # Temporary set to true to unrestrict public internet access for testing the connectivity. Must be closed in production
 }
 
-
+# This part can be used to import the existind database into the RDS
 resource "null_resource" "setup_db" {
   depends_on = [aws_db_instance.rds_instance] # Wait for the DB to be ready
   provisioner "local-exec" {
@@ -203,7 +214,7 @@ resource "null_resource" "setup_db" {
   }
 }
 
-
+# Outputs
 output "rds_hostname" {
   description = "RDS instance hostname"
   value       = aws_db_instance.rds_instance.address
