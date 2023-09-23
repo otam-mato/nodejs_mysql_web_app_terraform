@@ -1,8 +1,8 @@
 # Provider Configuration
 provider "aws" {
   region                    = "us-east-1"
-  shared_config_files       = ["/home/ec2-user/.aws/config"]
-  shared_credentials_files  = ["/home/ec2-user/.aws/credentials"]
+  shared_config_files       = ["/home/ec2-user/.aws/config"] # never hard-code the sensitive data
+  shared_credentials_files  = ["/home/ec2-user/.aws/credentials"] # never hard-code the sensitive data
 }
 
 # Data Sources
