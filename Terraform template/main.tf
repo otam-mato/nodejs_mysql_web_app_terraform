@@ -18,13 +18,13 @@ data "aws_vpc" "default" {
   default = true
 }
 
-data "http" "my_current_ip" {
-  url = "https://httpbin.org/ip"
-}
+# data "http" "my_current_ip" {
+#  url = "https://httpbin.org/ip"
+# }
 
 # Local Variables
 locals {
-  my_public_ip = replace(jsondecode(data.http.my_current_ip.body).origin, "/32", "")
+  # my_public_ip = replace(jsondecode(data.http.my_current_ip.body).origin, "/32", "")
   subnet_count    = 2  # Adjust this to the desired number of subnets
   base_cidr_block = data.aws_vpc.default.cidr_block
   subnet_bits     = 8  # You can adjust the number of bits as needed
@@ -119,7 +119,8 @@ resource "aws_security_group" "rds_security_group" {
     to_port     = 3306
     protocol    = "tcp"
     security_groups  = [aws_security_group.ec2_security_group.id] # I made the RDS intance accesible only from created EC2 instance.
-    cidr_blocks = [format("%s/32", local.my_public_ip)] # this allows the access from your current workstation
+    # cidr_blocks = [format("%s/32", local.my_public_ip)] # this allows the access from your current workstation
+    # cidr_blocks = ["54.158.206.196/24"]
   }
 }
 
