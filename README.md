@@ -269,17 +269,16 @@ git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
 cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
 ```
 
-#### Setup
+#### Install Node, NPM, and dependencies
 ```bash
-# Install Node, NPM, and dependencies
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
 nvm install 16.0.0
 nvm use 16.0.0
 npm install
 ```
 
-##### Set Environment Variables
-##### [GitHub Link](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/blob/76cab7e29bab68cd803616de1a8573ea4218eda8/Terraform%20template/terraform.tfvars)
+#### Set Environment Variables
+#### They should correlate with ones: [terraform.tfvars](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/blob/76cab7e29bab68cd803616de1a8573ea4218eda8/Terraform%20template/terraform.tfvars)
 
 ```
 export APP_DB_HOST=<paste here the output endpoint of the created RDS instance> \
