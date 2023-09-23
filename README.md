@@ -281,7 +281,7 @@ Alternatively, you can create the new database:
 
 ```bash
 # Connecting to the database
-mysql -h database-2.xxxxxxxxxxxx.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+mysql -h xxxxxxxxx.xxxxxxxxxxxx.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
 ```
 
 ```sql
