@@ -278,7 +278,7 @@ npm install
 ```
 
 #### Set Environment Variables
-#### They must correlate with: [terraform.tfvars](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/blob/76cab7e29bab68cd803616de1a8573ea4218eda8/Terraform%20template/terraform.tfvars)
+#### They must correlate with: [terraform.tfvars](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/blob/76cab7e29bab68cd803616de1a8573ea4218eda8/Terraform%20template/terraform.tfvars) as they were used for creating an RDS database
 
 ```
 export APP_DB_HOST=<paste here the output endpoint of the created RDS instance> \
