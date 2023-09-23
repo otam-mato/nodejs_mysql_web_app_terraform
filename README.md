@@ -322,8 +322,7 @@ export APP_DB_HOST=<paste here the output endpoint of the created RDS instance>
 npm install
 npm start
 ```
-If you do not set the env vars when starting the app the values 
-from `app/config/config.js` will be used
+If you do not set the env vars when starting the app the values from `app/config/config.js` will be used. In this case make sure they correlate with credentials used on RDS database.
 
 #### Access the app via the DNS or public IP of the EC2 instance. Confirm the database creation using the MySQL command.
 
