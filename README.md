@@ -314,7 +314,7 @@ create table suppliers(
 ```
 
 ### 3. Testing the App
-#### Start the app with npm
+#### Start the app with npm command
 
 ```zsh
 cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
