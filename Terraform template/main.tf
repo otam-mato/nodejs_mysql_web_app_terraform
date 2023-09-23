@@ -99,17 +99,9 @@ resource "aws_instance" "ec2_instance" {
   user_data     = <<-EOF
 #!/bin/bash
 sudo su
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-nvm install 16.0.0
-nvm use 16.0.0
-
 sudo yum install -y git
 git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git /home/ec2-user/nodejs_mysql_web_app_terraform
 cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
-npm install
   EOF
   
   tags = {
