@@ -8,7 +8,7 @@
 
 <br>
 
-# - Creating The Infrastructure with Terraform 
+# - Creating the infrastructure on AWS with Terraform 
 # - Deploying the app on the created EC2 and RDS instances.
 
 <br>
