@@ -278,6 +278,7 @@ nvm use 16.0.0
 npm install
 
 # Set Environment Variables
+# [GitHub Link](https://github.com/otam-mato/nodejs_mysql_web_app_terraform/blob/76cab7e29bab68cd803616de1a8573ea4218eda8/Terraform%20template/terraform.tfvars)
 export APP_DB_HOST=<paste here the output endpoint of the created RDS instance> \
 export APP_DB_USER=admin \
 export APP_DB_PASSWORD="<your password>" \
