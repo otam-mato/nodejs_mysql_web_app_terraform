@@ -119,7 +119,7 @@ resource "aws_security_group" "rds_security_group" {
     from_port   = 3306
     to_port     = 3306
     protocol    = "tcp"
-    cidr_blocks = ["54.158.206.0/24"]
+    cidr_blocks = ["0.0.0.0/0"]
     # security_groups  = [aws_security_group.ec2_security_group.id] # To restrict the RDS intance to be accesible only from created EC2 instance.
     # cidr_blocks = [format("%s/32", local.my_public_ip)] # this allows the access from your current workstation
   }
