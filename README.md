@@ -29,7 +29,7 @@
 This is a simple Node.JS Express application. It has a two-layer architecture: application layer and data layer. It connects to a MySQL database hosted on an AWS RDS instance, allowing for CRUD operations. Express provides a robust set of features for web and mobile applications.
 
 <p align="center">
-  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/938f8409-1cf9-4ae5-a5fd-549a395948da" width="700px"/>
+  <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/fa1c1e4f-f89b-4113-8217-d76bfd8ee5e4" width="700px"/>
 </p>
 
 <p align="center">
