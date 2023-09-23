@@ -142,7 +142,7 @@ resource "aws_db_instance" "rds_instance" {
   vpc_security_group_ids  = [aws_security_group.rds_security_group.id]
   db_subnet_group_name    = aws_db_subnet_group.rds_subnet_group.name
   skip_final_snapshot     = true
-  publicly_accessible     = false # Set to true to unrestrict public internet access for testing the connectivity
+  publicly_accessible     = true # Set to true to unrestrict public internet access for testing the connectivity
 }
 
 # Provisioning for RDS
