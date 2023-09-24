@@ -45,7 +45,7 @@ The Main Solution:
    - **serve-favicon**: Provides the small icon seen on browser tabs for the website.
    - **Custom Modules**: 
      - `supplier.controller`: Handles the logic for managing suppliers like fetching, adding, or updating their details.
-     - `config.js`: Keeps the server's settings and the logging setup.
+     - `config.js`: Keeps the server's settings for connectind to the MySQL database.
 
 #### **Configuration**:
    - The server starts on a port taken from a setting (like an environment variable) or uses `3000` as a default.
