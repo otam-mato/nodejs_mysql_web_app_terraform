@@ -44,10 +44,10 @@ This is a simple Node.JS Express application. It has a two-layer architecture: a
 ## Prerequisites
 - AWS Account
 - Proper Permissions for your AWS user
-- Configure AWS access with the command ```aws configure```
 - Terraform installed (https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - MySQL installed (https://muleif.medium.com/how-to-install-mysql-on-amazon-linux-2023-5d39afa5bf11)
 - A machine or EC2 instance to launch the Terraform script
+- Configure AWS access with AWS CLI and the command ```aws configure```
 
 
 ## Running the App on AWS EC2 and RDS MySQL Instances
