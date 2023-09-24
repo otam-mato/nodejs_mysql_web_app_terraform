@@ -330,7 +330,7 @@ If you do not set the env vars when starting the app the values from `app/config
   <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/08a5a711-8f1d-47ec-93fb-f73c430b47b9" width="700px"/>
 </p>
 
-#### Test the database using the MySQL commands.
+#### Test the database with MySQL commands.
 
 <p align="center">
   <img src="https://github.com/otam-mato/nodejs_mysql_web_app_terraform/assets/113034133/afb8cc08-2f0c-4dfe-84ae-0bf886ae0053" width="700px"/>
