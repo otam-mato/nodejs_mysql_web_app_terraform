@@ -91,7 +91,7 @@ locals {
   subnet_bits     = 8  # You can adjust the number of bits as needed
 }
 
-# Default VPC
+# I am using a Default VPC for simplicity
 resource "aws_default_vpc" "default" {
   enable_dns_hostnames = true
   enable_dns_support   = true
