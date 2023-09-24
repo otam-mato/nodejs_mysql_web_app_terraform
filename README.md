@@ -206,7 +206,7 @@ resource "aws_db_instance" "rds_instance" {
   publicly_accessible     = true # Temporary set to true to unrestrict public internet access for testing the connectivity. Must be closed in production
 }
 
-# This part can be used to import the existind database into the RDS
+# This part can be used to automate the import of the existing database into the RDS. Can be commented out if you plan to set up the database manually.
 resource "null_resource" "setup_db" {
   depends_on = [aws_db_instance.rds_instance] # Wait for the DB to be ready
   provisioner "local-exec" {
