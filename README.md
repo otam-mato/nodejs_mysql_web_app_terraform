@@ -8,8 +8,9 @@
 
 <br>
 
-# - Creating the infrastructure on AWS with Terraform 
-# - Deploying the app on the created EC2 and RDS instances.
+**Steps:**
+**- Creating the infrastructure on AWS with Terraform** 
+**- Deploying the app on the created EC2 and RDS instances.**
 
 <br>
 
