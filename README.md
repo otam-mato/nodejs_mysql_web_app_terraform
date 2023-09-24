@@ -3,7 +3,7 @@
 
 <br>
 
-> **Note:** Part of the series of demo projects experimenting with a Node.js app.<br><br>
+> **Note:** A part of the series of demo projects experimenting with a Node.js app.<br><br>
 > In this demo I automate creating the infrastructure on AWS with Terraform and deploy there the app on EC2 + RDS instances.
 
 <br>
