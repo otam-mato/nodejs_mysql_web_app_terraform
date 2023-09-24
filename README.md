@@ -1,5 +1,5 @@
 
-# Node.JS - MySQL Web App. 
+# Node.JS + MySQL Web App. 
 
 <br>
 
