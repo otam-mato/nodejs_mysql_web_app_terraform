@@ -265,6 +265,7 @@ ssh -i "your_key.pem" ec2-user@your_dns_name.compute-1.amazonaws.com
 ```
 #### Clone the current Repository
 ```bash
+sudo yum update
 git clone https://github.com/otam-mato/nodejs_mysql_web_app_terraform.git
 cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
 ```
