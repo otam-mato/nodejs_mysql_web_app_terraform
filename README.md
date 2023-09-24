@@ -322,7 +322,7 @@ cd /home/ec2-user/nodejs_mysql_web_app_terraform/resources/codebase_partner
 npm install
 npm start
 ```
-If you do not set the env vars when starting the app the values from `app/config/config.js` will be used. In this case make sure they correlate with credentials used on RDS database.
+f you don't specify environment variables when launching the application, it will automatically utilize the values from app/config/config.js as provided by the application's logic. In this case make sure they correlate with credentials used on RDS database and modify "app/config/config.js" accordingly.
 
 #### Access the app via the DNS or public IP of the EC2 instance. 
 
